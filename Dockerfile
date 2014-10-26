@@ -46,6 +46,8 @@ ENV PGPASSWORD hive
 # initialize hive metastore db
 RUN /etc/init.d/postgresql start &&\
 	psql -h localhost -U hive -d metastore -f $HIVE_HOME/scripts/metastore/upgrade/postgres/hive-schema-0.15.0.postgres.sql
+RUN /etc/init.d/postgresql start &&\
+	psql -h localhost -U hive -d metastore -f $HIVE_HOME/scripts/metastore/upgrade/postgres/hive-txn-schema-0.13.0.postgres.sql
 
 # copy hive configs and log4j properties. By default hive client logs goes to /tmp/logs/hive.log
 ADD hive-site.xml $HIVE_CONF/hive-site.xml
