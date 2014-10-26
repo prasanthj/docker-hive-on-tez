@@ -1,4 +1,4 @@
-FROM tez-0.5.0
+FROM prasanthj/tez-0.5.0
 MAINTAINER Prasanth Jayachandran
 
 USER root
