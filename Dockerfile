@@ -53,6 +53,10 @@ RUN /etc/init.d/postgresql start &&\
 ADD hive-site.xml $HIVE_CONF/hive-site.xml
 ADD hive-log4j.properties $HIVE_CONF/hive-log4j.properties
 
+# add test data and test query
+ADD store_sales.txt /tmp/
+ADD store_sales.sql /tmp/
+
 # set permissions for hive bootstrap file
 ADD hive-bootstrap.sh /etc/hive-bootstrap.sh
 RUN chown root:root /etc/hive-bootstrap.sh
