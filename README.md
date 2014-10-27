@@ -3,6 +3,12 @@ Docker image to run Apache Hive on Tez
 
 This repository contains a docker file to build a docker image to run Apache Hive on Tez. This docker file depends on my other repos containing [docker-tez] and [docker-hadoop] base images.
 
+## Current Version
+* Apache Hive (trunk version)
+* Apache Tez 0.5.0
+* Apache Hadoop 2.5.0
+* PostgreSQL 9.3 (Hive metastore backend)
+
 ## Running on Mac OS X
 
 This step is required only for Mac OS X as docker is not natively supported in Mac OS X. To run docker on Mac OS X we need Boot2Docker.
@@ -36,12 +42,6 @@ docker --tls build  -t prasanthj/hive-on-tez .
 ```
 docker --tls run -i -t -P prasanthj/hive-on-tez /etc/hive-bootstrap.sh -bash
 ```
-
-## Versions
-* Apache Hadoop 2.5.0
-* Apache Tez 0.5.0
-* Apache Hive (trunk)
-* Postgres 9.3
 
 ## Testing
 After launching the container using the command from "Running the image" section, bash is launched. On the bash prompt type the following to run a sample hive query

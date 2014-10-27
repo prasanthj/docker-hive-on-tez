@@ -1,4 +1,4 @@
-FROM prasanthj/tez-0.5.0
+FROM prasanthj/docker-tez
 MAINTAINER Prasanth Jayachandran
 
 USER root
