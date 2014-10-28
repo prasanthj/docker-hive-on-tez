@@ -64,5 +64,13 @@ RUN chmod 700 /etc/hive-bootstrap.sh
 
 ENV BOOTSTRAP /etc/hive-bootstrap.sh
 
-# run hive bootstrap script
-CMD ["/etc/hive-bootstrap.sh", "-d"]
+# There seems to be bug in AUFS that denies postgres permission to read /etc/ssl/private/ssl-cert-snakeoil.key file.
+# https://github.com/Painted-Fox/docker-postgresql/issues/30
+# https://github.com/docker/docker/issues/783
+# To avoid that bugs lets disable ssl in postgres.conf. If we really need ssl to encrypt postgres connections we have to refix permissions to /etc/ssl/private directory everytime until AUFS fixes the issue
+ENV POSTGRESQL_MAIN /var/lib/postgresql/9.3/main/
+ENV POSTGRESQL_CONFIG_FILE $POSTGRESQL_MAIN/postgresql.conf
+ENV POSTGRESQL_BIN /usr/lib/postgresql/9.3/bin/postgres
+ADD postgresql.conf $POSTGRESQL_MAIN
+RUN chown postgres:postgres $POSTGRESQL_CONFIG_FILE
+
