@@ -6,7 +6,7 @@ USER root
 # configure postgres as hive metastore backend
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update
-RUN apt-get -yq install postgresql-9.3 libpostgresql-jdbc-java
+RUN apt-get -yq install vim postgresql-9.3 libpostgresql-jdbc-java
 
 # create metastore db, hive user and assign privileges
 USER postgres
@@ -49,13 +49,19 @@ RUN /etc/init.d/postgresql start &&\
 RUN /etc/init.d/postgresql start &&\
 	psql -h localhost -U hive -d metastore -f $HIVE_HOME/scripts/metastore/upgrade/postgres/hive-txn-schema-0.13.0.postgres.sql
 
+# add all files to /opt/files
+RUN mkdir /opt/files
+
 # copy hive configs and log4j properties. By default hive client logs goes to /tmp/logs/hive.log
+ADD hive-site.xml /opt/files/
+ADD hive-log4j.properties /opt/files/
 ADD hive-site.xml $HIVE_CONF/hive-site.xml
 ADD hive-log4j.properties $HIVE_CONF/hive-log4j.properties
 
 # add test data and test query
-ADD store_sales.txt /tmp/
-ADD store_sales.sql /tmp/
+ADD store_sales.txt /opt/files/
+ADD store_sales.sql /opt/files/
+ADD datagen.py /opt/files/
 
 # set permissions for hive bootstrap file
 ADD hive-bootstrap.sh /etc/hive-bootstrap.sh

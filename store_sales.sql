@@ -29,7 +29,7 @@ create table if not exists store_sales
 )
 row format delimited fields terminated by '|';
 
-load data local inpath '/tmp/store_sales.txt' overwrite into table store_sales;
+load data local inpath '/opt/files/store_sales.txt' overwrite into table store_sales;
 
 create table if not exists store_sales_orc like store_sales;
 alter table store_sales_orc set fileformat orc;

@@ -46,7 +46,7 @@ If you do not want to pull the image from Docker hub, you can build it locally u
 ## Testing Hive on Tez
 After launching the container using the command from "Running the image" section, bash is launched. On the bash prompt type the following to run a sample hive query
 
-> hive -f /tmp/store_sales.sql
+> hive -f /opt/files/store_sales.sql
 
 Running the above command should show output like below after successful execution
 
@@ -76,7 +76,7 @@ Running the above command should show output like below after successful executi
 
 ## Testing Hive on MapReduce v2 (YARN)
 Run the same example above with the following additional hive config
-> hive -f /tmp/store_sales.sql -hiveconf hive.execution.engine=mr -hiveconf mapreduce.framework.name=yarn -hiveconf yarn.resourcemanager.address=localhost:8032
+> hive -f /opt/files/store_sales.sql -hiveconf hive.execution.engine=mr -hiveconf mapreduce.framework.name=yarn -hiveconf yarn.resourcemanager.address=localhost:8032
 
 Running the above command should show output like below after successful execution
 
