@@ -26,9 +26,6 @@ ENV HIVE_HOME /usr/local/hive-dist/apache-hive-0.15.0-SNAPSHOT-bin
 ENV HIVE_CONF $HIVE_HOME/conf
 ENV PATH $HIVE_HOME/bin:$PATH
 
-# hive uses hadoop-2.5.0 but tez-0.5.2-SNAPSTHO pulls hadoop-2.4.0. We need to add this jar to classpath for run tez tasks
-RUN $BOOTSTRAP && $HADOOP_PREFIX/bin/hadoop dfsadmin -safemode leave && $HADOOP_PREFIX/bin/hdfs dfs -put $HIVE_HOME/lib/hadoop-yarn-server-resourcemanager-2.5.0.jar /tez/lib/
-
 # add postgresql jdbc jar to classpath
 RUN ln -s /usr/share/java/postgresql-jdbc4.jar $HIVE_HOME/lib/postgresql-jdbc4.jar
 
