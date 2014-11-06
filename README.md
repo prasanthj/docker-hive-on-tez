@@ -50,29 +50,29 @@ After launching the container using the command from "Running the image" section
 
 Running the above command should show output like below after successful execution
 
-    Status: Running (Executing on YARN cluster with App id application_1414390634334_0005)
+    Status: Running (Executing on YARN cluster with App id application_1415171696020_0001)
     
-    Map 1: -/-	Reducer 2: 0/1	Reducer 3: 0/1	
-    Map 1: 0/1	Reducer 2: 0/1	Reducer 3: 0/1	
-    Map 1: 0(+1)/1	Reducer 2: 0/1	Reducer 3: 0/1	
-    Map 1: 1/1	Reducer 2: 0/1	Reducer 3: 0/1	
-    Map 1: 1/1	Reducer 2: 0(+1)/1	Reducer 3: 0/1	
-    Map 1: 1/1	Reducer 2: 1/1	Reducer 3: 0/1	
-    Map 1: 1/1	Reducer 2: 1/1	Reducer 3: 0(+1)/1	
-    Map 1: 1/1	Reducer 2: 1/1	Reducer 3: 1/1	
-    Status: Finished successfully in 2.47 seconds
+    --------------------------------------------------------------------------------
+            VERTICES      STATUS  TOTAL  COMPLETED  RUNNING  PENDING  FAILED  KILLED
+    --------------------------------------------------------------------------------
+    Map 1 ..........   SUCCEEDED      1          1        0        0       0       0
+    Reducer 2 ......   SUCCEEDED      1          1        0        0       0       0
+    Reducer 3 ......   SUCCEEDED      1          1        0        0       0       0
+    --------------------------------------------------------------------------------
+    VERTICES: 03/03  [==========================>>] 100%  ELAPSED TIME: 1.65 s     
+    --------------------------------------------------------------------------------
     OK
-    2452143	30
-    2451524	25
-    2452274	25
-    2452187	20
-    2450952	16
-    2451942	16
-    2451083	15
-    2451390	15
-    2451415	15
-    2452181	15
-    Time taken: 3.45 seconds, Fetched: 10 row(s)
+    2452143 30
+    2451524 25
+    2452274 25
+    2452187 20
+    2450952 16
+    2451942 16
+    2451083 15
+    2451390 15
+    2451415 15
+    2452181 15
+    Time taken: 2.566 seconds, Fetched: 10 row(s)
 
 ## Testing Hive on MapReduce v2 (YARN)
 Run the same example above with the following additional hive config
@@ -85,16 +85,16 @@ Running the above command should show output like below after successful executi
     Stage-Stage-2: Map: 1  Reduce: 1   Cumulative CPU: 33.47 sec   HDFS Read: 2234 HDFS Write: 110 SUCCESS
     Total MapReduce CPU Time Spent: 36 seconds 640 msec
     OK
-    2452143	30
-    2451524	25
-    2452274	25
-    2452187	20
-    2450952	16
-    2451942	16
-    2451083	15
-    2451390	15
-    2451415	15
-    2452181	15
+    2452143 30
+    2451524 25
+    2452274 25
+    2452187 20
+    2450952 16
+    2451942 16
+    2451083 15
+    2451390 15
+    2451415 15
+    2452181 15
     Time taken: 53.967 seconds, Fetched: 10 row(s)
 
 ## Viewing Web UI
@@ -105,10 +105,10 @@ If you are running docker using Boot2Docker then do the following steps
 _NOTE_: 172.17.0.X is usually the ipaddress of docker container. 192.168.59.103 is the ipaddress exported in `DOCKER_HOST`
 
  * Get containers IP address
-	* To get containers IP address we need CONTAINER_ID. To get container id use the following command which should list all running containers and its ID
-	`docker --tls ps`
-	* Use the following command to get containers IP address (where CONTAINER_ID is the container id of prasanthj/hive-on-tez image)
-	`docker --tls inspect -f=“{{.NetworkSettings.IPAddress}}” CONTAINER_ID`
+    * To get containers IP address we need CONTAINER_ID. To get container id use the following command which should list all running containers and its ID
+    `docker --tls ps`
+    * Use the following command to get containers IP address (where CONTAINER_ID is the container id of prasanthj/hive-on-tez image)
+    `docker --tls inspect -f=“{{.NetworkSettings.IPAddress}}” CONTAINER_ID`
 
  * Launch a web browser and type `http://<container-ip-address>:8088` to view hadoop cluster web UI.
 
