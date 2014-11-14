@@ -4,7 +4,7 @@ Docker image to run Apache Hive on Tez
 This repository contains a docker file to build a docker image to run Apache Hive on Tez. This docker file depends on my other repos containing [docker-tez] and [docker-hadoop] base images.
 
 ## Current Version
-* Apache Hive (trunk version)
+* Apache Hive 0.14.0
 * Apache Tez 0.5.2
 * Apache Hadoop 2.5.0
 * PostgreSQL 9.3 (Hive metastore backend)
