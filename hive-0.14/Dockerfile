@@ -18,7 +18,7 @@ USER root
             
 # download hive and set environment
 ENV HIVE_VERSION 0.14.0
-RUN curl -s http://www.us.apache.org/dist/hive/hive-${HIVE_VERSION}/apache-hive-0.14.0-bin.tar.gz | tar -xz -C /usr/local
+RUN curl -s http://www.us.apache.org/dist/hive/hive-${HIVE_VERSION}/apache-hive-${HIVE_VERSION}-bin.tar.gz | tar -xz -C /usr/local
 RUN cd /usr/local && ln -s apache-hive-${HIVE_VERSION}-bin hive
 ENV HIVE_HOME /usr/local/hive
 ENV HIVE_CONF $HIVE_HOME/conf
