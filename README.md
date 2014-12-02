@@ -25,7 +25,7 @@ This step is required only for Mac OS X as docker is not natively supported in M
 ## Pull the image
 You can either pull the image that is already pre-built from Docker hub or build the image locally (refer next section)
 
-> docker --tls pull prasanthj/hive-on-tez
+> docker --tls pull prasanthj/docker-hive-on-tez
 
 
 ## Building the image
@@ -35,12 +35,12 @@ If you do not want to pull the image from Docker hub, you can build it locally u
 `git clone https://github.com/prasanthj/docker-hive-on-tez.git`
 * Change to docker-hive-on-tez directory `cd docker-hive-on-tez`
 
-> docker --tls build  -t prasanthj/hive-on-tez .
+> docker --tls build  -t prasanthj/docker-hive-on-tez .
 
 
 ## Running the image
 
-> docker --tls run -i -t -P prasanthj/hive-on-tez /etc/hive-bootstrap.sh -bash
+> docker --tls run -i -t -P prasanthj/docker-hive-on-tez /etc/hive-bootstrap.sh -bash
 
 
 ## Testing Hive on Tez
