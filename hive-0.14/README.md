@@ -25,7 +25,7 @@ This step is required only for Mac OS X as docker is not natively supported in M
 ## Pull the image
 You can either pull the image that is already pre-built from Docker hub or build the image locally (refer next section)
 
-> docker --tls pull prasanthj/hive-on-tez
+> docker --tls pull prasanthj/docker-hive-on-tez:hive-0.14
 
 
 ## Building the image
