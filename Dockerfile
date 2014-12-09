@@ -27,6 +27,9 @@ ENV HIVE_HOME /usr/local/hive-dist/apache-hive-${HIVE_VERSION}-bin
 ENV HIVE_CONF $HIVE_HOME/conf
 ENV PATH $HIVE_HOME/bin:$PATH
 
+# zookeeper pulls jline 0.9.94 and hive pulls jline2. To workaround incompatibility load user classpath first. Refer HIVE-8609
+ENV HADOOP_USER_CLASSPATH_FIRST true
+
 # add postgresql jdbc jar to classpath
 RUN ln -s /usr/share/java/postgresql-jdbc4.jar $HIVE_HOME/lib/postgresql-jdbc4.jar
 
