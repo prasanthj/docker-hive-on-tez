@@ -37,6 +37,14 @@ If you do not want to pull the image from Docker hub, you can build it locally u
 
 > docker --tls build  -t prasanthj/hive-on-tez .
 
+NOTE: If the above step fails with the following exception
+`The PostgreSQL server failed to start. Please check the log output:
+2014-12-10 00:26:07 UTC FATAL:  could not access private key file "/etc/ssl/private/ssl-cert-snakeoil.key": Permission denied
+   ...fail!`
+
+then build the image with --no-cache option to invalidate docker cache
+
+> docker --tls build --no-cache -t prasanthj/docker-hive-on-tez .
 
 ## Running the image
 

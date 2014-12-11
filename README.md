@@ -6,7 +6,7 @@ This repository contains a docker file to build a docker image to run Apache Hiv
 ## Current Version
 * Apache Hive (trunk version)
 * Apache Tez 0.5.2
-* Apache Hadoop 2.5.0
+* Apache Hadoop 2.5.2
 * PostgreSQL 9.3 (Hive metastore backend)
 
 ## Running on Mac OS X
@@ -35,12 +35,20 @@ If you do not want to pull the image from Docker hub, you can build it locally u
 `git clone https://github.com/prasanthj/docker-hive-on-tez.git`
 * Change to docker-hive-on-tez directory `cd docker-hive-on-tez`
 
-> docker --tls build  -t prasanthj/docker-hive-on-tez .
+> docker --tls build  -t local-hive-on-tez .
 
+NOTE: If the above step fails with the following exception
+`The PostgreSQL server failed to start. Please check the log output:
+2014-12-10 00:26:07 UTC FATAL:  could not access private key file "/etc/ssl/private/ssl-cert-snakeoil.key": Permission denied
+   ...fail!`
+
+then build the image with --no-cache option to invalidate docker cache
+
+> docker --tls build --no-cache -t local-hive-on-tez .
 
 ## Running the image
 
-> docker --tls run -i -t -P prasanthj/docker-hive-on-tez /etc/hive-bootstrap.sh -bash
+> docker --tls run -i -t -P local-hive-on-tez /etc/hive-bootstrap.sh -bash
 
 
 ## Testing Hive on Tez
@@ -107,7 +115,7 @@ _NOTE_: 172.17.0.X is usually the ipaddress of docker container. 192.168.59.103 
  * Get containers IP address
     * To get containers IP address we need CONTAINER_ID. To get container id use the following command which should list all running containers and its ID
     `docker --tls ps`
-    * Use the following command to get containers IP address (where CONTAINER_ID is the container id of prasanthj/hive-on-tez image)
+    * Use the following command to get containers IP address (where CONTAINER_ID is the container id of local-hive-on-tez image)
     `docker --tls inspect -f=“{{.NetworkSettings.IPAddress}}” CONTAINER_ID`
 
  * Launch a web browser and type `http://<container-ip-address>:8088` to view hadoop cluster web UI.
