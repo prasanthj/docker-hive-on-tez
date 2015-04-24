@@ -14,13 +14,14 @@ ADD store_sales.* /opt/files/
 ADD datagen.py /opt/files/
 
 # clone and compile hive
-ENV HIVE_VERSION 0.15.0-SNAPSHOT
+ENV HIVE_VERSION 1.2.0
+ENV HIVE_SNAPSHOT_VERSION ${HIVE_VERSION}-SNAPSHOT
 RUN cd /usr/local && git clone https://github.com/apache/hive.git
 RUN cd /usr/local/hive && /usr/local/maven/bin/mvn clean install -DskipTests -Phadoop-2,dist
-RUN mkdir /usr/local/hive-dist && tar -xf /usr/local/hive/packaging/target/apache-hive-${HIVE_VERSION}-bin.tar.gz -C /usr/local/hive-dist
+RUN mkdir /usr/local/hive-dist && tar -xf /usr/local/hive/packaging/target/apache-hive-${HIVE_SNAPSHOT_VERSION}-bin.tar.gz -C /usr/local/hive-dist
 
 # set hive environment
-ENV HIVE_HOME /usr/local/hive-dist/apache-hive-${HIVE_VERSION}-bin
+ENV HIVE_HOME /usr/local/hive-dist/apache-hive-${HIVE_SNAPSHOT_VERSION}-bin
 ENV HIVE_CONF $HIVE_HOME/conf
 ENV PATH $HIVE_HOME/bin:$PATH
 ADD hive-site.xml $HIVE_CONF/hive-site.xml
@@ -58,7 +59,7 @@ RUN /etc/init.d/postgresql start &&\
      psql --command "ALTER USER hive WITH SUPERUSER;" && \
      psql --command "GRANT ALL PRIVILEGES ON DATABASE metastore TO hive;" && \
      cd $HIVE_HOME/scripts/metastore/upgrade/postgres/ &&\
-        psql -h localhost -U hive -d metastore -f hive-schema-0.15.0.postgres.sql
+        psql -h localhost -U hive -d metastore -f hive-schema-${HIVE_VERSION}.postgres.sql
 
 # revert back to root user
 USER root
